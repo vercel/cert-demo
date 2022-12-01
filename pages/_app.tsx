@@ -5,9 +5,9 @@ import 'styles/globals.css';
 
 // vs manual font setup, we get:
 // - significantly easier setup
-// - automatic best practices
+// - automatic best font practices
 // - reduced layout shift
-// - ...
+// - no network requests from the browser
 const primaryFont = Inter({
   subsets: ['latin'],
   variable: '--primary-font',

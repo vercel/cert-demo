@@ -1,0 +1,38 @@
+import { getProducts } from '#/lib/utils';
+import { ProductCard } from '#/ui/ProductCard';
+import Link from 'next/link';
+
+export const getStaticProps = async () => {
+  const products = await getProducts();
+
+  return {
+    props: {
+      products,
+    },
+  };
+};
+
+export default function Page({ products }) {
+  return (
+    <div className="space-y-7">
+      <div className="text-3xl font-semibold text-white">My Camera Shop</div>
+
+      <div className="grid grid-cols-4 gap-6">
+        {products.map((product) => (
+          <div key={product.id} className="col-span-4 lg:col-span-1">
+            <Link
+              // vs `<a>`, we get:
+              // - client-side navigation (no full page reload)
+              // - prefetching (<Link>'s in viewport)
+              // - ...
+              href={`/product/${product.id}`}
+              className="block rounded-xl ring-offset-8 ring-offset-black hover:ring hover:ring-vercel-pink"
+            >
+              <ProductCard product={product} />
+            </Link>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}

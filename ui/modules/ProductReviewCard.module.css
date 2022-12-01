@@ -1,0 +1,24 @@
+.card-heading {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5rem /* 8px */;
+}
+
+.card-title {
+  font-size: 0.875rem /* 14px */;
+  line-height: 1.25rem /* 20px */;
+  color: rgb(255 255 255);
+}
+
+.card-img {
+  height: 1.5rem /* 24px */;
+  width: 1.5rem /* 24px */;
+  margin-right: 0.5rem /* 8px */;
+  border-radius: 9999px;
+  background-color: rgb(63 63 70);
+}
+
+.card-text {
+  margin-top: 1rem /* 16px */;
+  color: rgb(161 161 170);
+}

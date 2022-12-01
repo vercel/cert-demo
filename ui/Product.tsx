@@ -61,9 +61,9 @@ export const Product = ({ product }: { product: IProduct }) => {
       </div>
 
       <div className="col-span-full space-y-4 lg:col-span-2">
-        <div className="truncate text-xl font-medium text-white lg:text-3xl">
+        <h1 className="truncate text-xl font-medium text-white lg:text-3xl">
           {product.name}
-        </div>
+        </h1>
 
         <ProductRating rating={product.rating} />
 

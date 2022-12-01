@@ -15,7 +15,7 @@ export const getStaticProps = async () => {
 export default function Page({ products }) {
   return (
     <div className="space-y-7">
-      <div className="text-3xl font-semibold text-white">My Camera Shop</div>
+      <h1 className="text-3xl font-semibold text-white">My Camera Shop</h1>
 
       <div className="grid grid-cols-4 gap-6">
         {products.map((product) => (

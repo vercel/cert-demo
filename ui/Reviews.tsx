@@ -1,6 +1,6 @@
 import { type IReview } from '#/lib/utils';
-import { ProductReviewCard } from '#/ui/ProductReviewCard';
-// import { ProductReviewCard as ProductReviewCardCss } from '#/ui/modules/ProductReviewCard';
+import { ProductReviewCard as ProductReviewCardCss } from '#/ui/ProductReviewCard';
+// import { ProductReviewCard as ReviewCssModules } from '#/ui/modules/ProductReviewCard';
 
 export function Reviews({ reviews }: { reviews: IReview[] }) {
   return (
@@ -10,9 +10,9 @@ export function Reviews({ reviews }: { reviews: IReview[] }) {
         {reviews.map((review) => {
           return (
             <div key={review.id}>
-              <ProductReviewCard review={review} />
+              <ProductReviewCardCss review={review} />
               {/* Styled using in-built CSS Modules */}
-              {/* <ProductReviewCardCss review={review} /> */}
+              {/* <ReviewCssModules review={review} /> */}
             </div>
           );
         })}

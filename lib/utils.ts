@@ -1,26 +1,36 @@
-// `fetch` on the the server requires absolute paths
-function getBaseUrl() {
-  // production: https://acme.vercel.app or https://acme.com
-  if (process.env.VERCEL_URL) {
-    return `https://${process.env.VERCEL_URL}`;
-  }
-
-  // development: https://localhost:3000
-  return `http://localhost:${process.env.PORT ?? 3000}`;
-}
+import { promises as fs } from 'fs';
+import path from 'path';
 
 export const getProducts = async () => {
-  const res = await fetch(`${getBaseUrl()}/api/products`);
-  const products = res.json() as Promise<IProduct[]>;
+  // We'd normally get data from an external data source
+  return JSON.parse(
+    await fs.readFile(
+      path.join(process.cwd(), 'data') + '/products.json',
+      'utf8',
+    ),
+  ) as SingleProduct[];
+};
 
-  return products;
+const getReviews = async () => {
+  return JSON.parse(
+    await fs.readFile(
+      path.join(process.cwd(), 'data') + '/reviews.json',
+      'utf8',
+    ),
+  ) as IReview[];
 };
 
 export const getProduct = async (id: string) => {
-  const res = await fetch(`${getBaseUrl()}/api/products/${id}`);
-  const product = res.json() as Promise<SingleProduct>;
+  const products = await getProducts();
+  const reviews = await getReviews();
 
-  return product;
+  const product = products.find((product) => product.id === id);
+
+  return {
+    ...(product ? product : {}),
+    reviews,
+    similarProducts: products.filter((product) => product.id !== id),
+  };
 };
 
 export type IProduct = {

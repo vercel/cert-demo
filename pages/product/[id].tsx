@@ -1,3 +1,6 @@
+import type { GetStaticProps } from 'next';
+
+import type { SingleProduct } from '#/lib/utils';
 import { getProduct, getProducts } from '#/lib/utils';
 import { Product } from '#/ui/Product';
 import { Reviews } from '#/ui/Reviews';
@@ -6,6 +9,10 @@ import { SimilarProducts } from '#/ui/SimilarProducts';
 // ====================
 // 1. Static Generation
 // ====================
+
+type PageProps = {
+  product: SingleProduct;
+};
 
 // Provide a list of products to pre-render at build time
 export const getStaticPaths = async () => {
@@ -27,9 +34,9 @@ export const getStaticPaths = async () => {
 };
 
 // Fetch necessary data for each product when pre-rendered or revalidated
-export const getStaticProps = async (context) => {
+export const getStaticProps: GetStaticProps = async (context) => {
   const id = context.params?.id;
-  const product = await getProduct(id);
+  const product = await getProduct(id as string);
 
   return {
     props: {
@@ -72,7 +79,7 @@ export const getStaticProps = async (context) => {
 
 export default function Page({
   product, // passed from getStaticProps or getServerSideProps
-}) {
+}: PageProps) {
   return (
     <div className="space-y-8 lg:space-y-14">
       <Product product={product} />

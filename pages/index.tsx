@@ -1,3 +1,4 @@
+import type { IProduct } from '#/lib/utils';
 import { getProducts } from '#/lib/utils';
 import { ProductCard } from '#/ui/ProductCard';
 import Link from 'next/link';
@@ -12,7 +13,11 @@ export const getStaticProps = async () => {
   };
 };
 
-export default function Page({ products }) {
+type PageProps = {
+  products: IProduct[];
+};
+
+export default function Page({ products }: PageProps) {
   return (
     <div className="space-y-7">
       <h1 className="text-3xl font-semibold text-white">My Camera Shop</h1>
